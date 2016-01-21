@@ -1,0 +1,54 @@
+<html>
+<head>
+	<title>Overview of D3</title>
+	<!-- <script src="http://d3js.org/d3.v3.min.js"></script> -->
+	<script src="d3.v3.min.js"></script>
+	
+	
+</head>
+<body>
+	<script>
+		d3.json("resources/wafermap_data.json", function(wafermap_data){
+			var positions = wafermap_data.data;
+			//var positions = [{ "x" : 1, "y" : 1 },{ "x" : 2, "y" : 2 }, { "x" : 3, "y" : 3 } ];
+			var canvasSizeX = 400;
+			var canvasSizeY = canvasSizeX;
+			var waferSizeX = wafermap_data.xDim;
+			var waferSizeY = wafermap_data.yDim;
+			var centerX = canvasSizeX /2;
+			var centerY = canvasSizeY /2;
+			var radius = canvasSizeX/2;
+			var chipSizeX = canvasSizeX / waferSizeX;
+			var chipSizeY = canvasSizeY / waferSizeY;
+
+			// **** Drawing simple shapes ****
+			var canvas = d3.select("body")
+						.append("svg")
+						.attr("style", "outline: thin solid black;") // Give it a border
+						.attr("width",canvasSizeX)
+						.attr("height",canvasSizeY);
+
+			var circle = canvas.append("circle")
+						.attr("cx",centerX)
+						.attr("cy",centerY)
+						.attr("r",radius)
+						.attr("fill","lightblue");
+
+
+			positions.forEach(function(i){
+				var posX = i.x * chipSizeX;
+				var posY = i.y * chipSizeY;
+				canvas.append("rect")
+						.attr("x",posX)
+						.attr("y",posY)
+						.attr("width", chipSizeX)
+						.attr("height", chipSizeY);
+			});
+
+
+		});
+					
+
+	</script>
+</body>
+</html>
