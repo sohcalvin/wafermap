@@ -11,17 +11,24 @@ class WaferMap(object) :
         if(self.body is None) :
             return "Map body is empty"
         else :
-            return str(self.body)
+             return str(self.body)
+
+    def _toString(self):
+        pass
 
     def initMap(self, row, col, pattern=None):
         self.body = np.zeros([row,col])
         if(pattern is not None) :
-            self._markPattern(pattern)
+            self._radomisedMarkPattern(pattern)
 
-    def _markPattern(self, pattern):
-        for row, col in pattern :
-            # row, col = i
-            self.body[row][col] = 1
+    def _radomisedMarkPattern(self,pattern) :
+        for i in pattern :
+            row,col = i
+            offsetRow = np.random.randint(-1,1,1)
+            offsetCol = np.random.randint(-1,1,1)
+            row += offsetRow
+            col += offsetCol
+            self.body[row, col] = 1
 
 
 
