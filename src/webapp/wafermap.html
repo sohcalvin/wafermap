@@ -9,8 +9,9 @@
 <body>
 	<script>
 		d3.json("resources/wafermap_data.json", function(wafermap_data){
-			var positions = wafermap_data.data;
+			var bins = wafermap_data.bindata;
 			//var positions = [{ "x" : 1, "y" : 1 },{ "x" : 2, "y" : 2 }, { "x" : 3, "y" : 3 } ];
+			positions = bins["1"];
 			var canvasSizeX = 400;
 			var canvasSizeY = canvasSizeX;
 			var waferSizeX = wafermap_data.xDim;
