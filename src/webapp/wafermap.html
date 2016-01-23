@@ -3,53 +3,31 @@
 	<title>Overview of D3</title>
 	<!-- <script src="http://d3js.org/d3.v3.min.js"></script> -->
 	<script src="d3.v3.min.js"></script>
-	
-	
+	<script src="WaferMap.js"></script>
+	<style>
+		.container {
+    		padding-top: 10px;
+    		padding-right: 10px;
+    		padding-bottom: 10px;
+    		padding-left: 10px;
+			height:50%;
+			overflow: auto;
+}
+	</style>
+
 </head>
 <body>
+<div id="ContainerPattern1" class = "container" ></div>
+<div id="ContainerPattern2" class = "container" ></div>
 	<script>
-		d3.json("resources/wafermap_data.json", function(wafermap_data){
-			var bins = wafermap_data.bindata;
-			//var positions = [{ "x" : 1, "y" : 1 },{ "x" : 2, "y" : 2 }, { "x" : 3, "y" : 3 } ];
-			positions = bins["1"];
-			var canvasSizeX = 400;
-			var canvasSizeY = canvasSizeX;
-			var waferSizeX = wafermap_data.xDim;
-			var waferSizeY = wafermap_data.yDim;
-			var centerX = canvasSizeX /2;
-			var centerY = canvasSizeY /2;
-			var radius = canvasSizeX/2;
-			var chipSizeX = canvasSizeX / waferSizeX;
-			var chipSizeY = canvasSizeY / waferSizeY;
+		var waferMap = new WaferMap();
+		waferMap.loadAndDraw("resources/wafermap_data.json", "#ContainerPattern1");
+		waferMap.loadAndDraw("resources/wafermap_data2.json", "#ContainerPattern1");
 
-			// **** Drawing simple shapes ****
-			var canvas = d3.select("body")
-						.append("svg")
-						.attr("style", "outline: thin solid black;") // Give it a border
-						.attr("width",canvasSizeX)
-						.attr("height",canvasSizeY);
-
-			var circle = canvas.append("circle")
-						.attr("cx",centerX)
-						.attr("cy",centerY)
-						.attr("r",radius)
-						//.attr("fill","white");
-						.attr("fill","lightblue");
+		waferMap.loadAndDraw("resources/wafermap_data.json", "#ContainerPattern2");
+		waferMap.loadAndDraw("resources/wafermap_data2.json", "#ContainerPattern2");
 
 
-			positions.forEach(function(i){
-				var posX = i.x * chipSizeX;
-				var posY = i.y * chipSizeY;
-				canvas.append("rect")
-						.attr("x",posX)
-						.attr("y",posY)
-						.attr("width", chipSizeX)
-						.attr("height", chipSizeY);
-			});
-
-
-		});
-					
 
 	</script>
 </body>
