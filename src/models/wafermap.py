@@ -1,4 +1,5 @@
 import numpy as np
+import pickle
 
 class WaferMap(object) :
     def __init__(self, id, title=None):
@@ -48,12 +49,19 @@ class WaferMap(object) :
                 binValue = self.body[y][x]
                 if(binValue == 1) :
                     bin1Cells.append({"x" : x, "y" : y})
-
-
-
-
         return json;
 
+    def save(self, filename):
+        with open(filename, 'wb') as f:
+            pickle.dump(self, f, pickle.HIGHEST_PROTOCOL)
+            f.close()
+
+    @staticmethod
+    def load(filename):
+        with open(filename, 'rb') as f:
+            wafermap = pickle.load(f)
+            f.close()
+            return wafermap;
 
 
 

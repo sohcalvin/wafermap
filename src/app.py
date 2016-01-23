@@ -6,13 +6,15 @@ import json
 
 pattern1 = [[i,i] for i in (range(25,40))]
 
-waferMap = WaferMap("wafer1", title="Pattern1")
-waferMap.initMap(100,100,pattern1)
+for i in range(1,10):
+    waferid = "wafer{0}".format(i)
+    waferMap = WaferMap(waferid, title="Pattern1")
+    waferMap.initMap(100,100,pattern1)
+    waferMap.save("data/{0}".format(waferid))
 
-# print(waferMap)
+# waferMap2 = WaferMap.load("t.txt")
 
-jsonData = waferMap.jsonData()
-print(json.dumps(jsonData))
-# json.dumps(your_data, ensure_ascii=False)
+# jsonData = waferMap2.jsonData();
+# print(json.dumps(jsonData))
 
 
