@@ -27,15 +27,45 @@ def loadData():
         bodyOneLine = []
         for i in bodyArray :
             bodyOneLine.extend(i)
-        outData.append(bodyOneLine)
+        outData.append([waferMap.getTitle(), bodyOneLine])
+
     return outData
+
+def buildNaiveBayesModel(X,Y) :
+    #Naive Bayes Classifier
+    from sklearn.naive_bayes import MultinomialNB
+    classifier = MultinomialNB()
+    classifier.fit(X,Y)
+    return classifier
 
 # generateData()
 
 dataOneLinePerMap = loadData()
+maps = dataOneLinePerMap[1:]
+print(maps)
 pandaDataMaps = pd.DataFrame(dataOneLinePerMap)
+pandaDataMaps.columns =["pattern", "body"]
+X = pandaDataMaps['body'].values
+X2 = pd.DataFrame(X)
 
-print(pandaDataMaps)
+Y = pandaDataMaps['pattern'].values
+
+from sklearn.cross_validation import train_test_split
+X_train, X_test, Y_train, Y_test = train_test_split(X,Y, test_size=0.20, random_state=4)
+
+print("Data Set Shapes trainX%s trainY%s testX%s testY%s" %(X_train.shape,Y_train.shape,X_test.shape,Y_test.shape))
+
+# model = buildNaiveBayesModel(X_train, Y_train)
+# train_pred = model.predict(X_train)
+# test_pred = model.predict(X_test)
+# print("Prediction score is " , model.score(X,Y))
+# from sklearn import metrics
+# print( "Train Accuracy :", metrics.accuracy_score(Y_train, train_pred))
+# print( "Test Accuracy :", metrics.accuracy_score(Y_test, test_pred))
+# print(X)
+# print(X2)
+# print(Y)
+
 
 
 

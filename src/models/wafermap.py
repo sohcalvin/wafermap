@@ -15,8 +15,12 @@ class WaferMap(object) :
             return "Map body is empty"
         else :
              return str(self.body)
+
     def getBody(self):
         return self.body
+
+    def getTitle(self):
+        return self.title
 
     def _toString(self):
         pass
