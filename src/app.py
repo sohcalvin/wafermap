@@ -10,7 +10,7 @@ dataDir = "data/"
 def generateData() :
     # pattern1 = [[i,i] for i in (range(25,40))]
     pattern1 = [[i,i] for i in (range(25,35))]
-    pattern2 = [[i,i] for i in (range(25,45))]
+    pattern2 = [[i,i] for i in (range(26,40))]
     for i in range(1,200):
         waferid = "wafer{0}".format(i)
         waferMap = WaferMap(waferid)
