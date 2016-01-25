@@ -3,7 +3,6 @@ import pickle
 
 class WaferMap(object) :
     def __init__(self, id, title=None):
-        print("init ...")
         self.body = None
         self.id = id
         self.title = title
@@ -21,6 +20,8 @@ class WaferMap(object) :
 
     def getTitle(self):
         return self.title
+    def setTitle(self, title):
+        self.title = title
 
     def _toString(self):
         pass

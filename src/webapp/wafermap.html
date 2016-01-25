@@ -21,11 +21,12 @@
 <div id="ContainerPattern2" class = "container" ></div>
 	<script>
 		var waferMap = new WaferMap();
-		waferMap.loadAndDraw("resources/wafermap_data.json", "#ContainerPattern1");
-		waferMap.loadAndDraw("resources/wafermap_data2.json", "#ContainerPattern1");
-
-		waferMap.loadAndDraw("resources/wafermap_data.json", "#ContainerPattern2");
-		waferMap.loadAndDraw("resources/wafermap_data2.json", "#ContainerPattern2");
+		for(var i =0 ; i < 50; i++){
+			waferMap.loadAndDraw("/map/" + i, "#ContainerPattern1");
+		}
+		<!--waferMap.loadAndDraw("resources/wafermap_data2.json", "#ContainerPattern1");-->
+		<!--waferMap.loadAndDraw("resources/wafermap_data.json", "#ContainerPattern2");-->
+		<!--waferMap.loadAndDraw("resources/wafermap_data2.json", "#ContainerPattern2");-->
 
 
 
