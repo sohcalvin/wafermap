@@ -1,25 +1,21 @@
 from flask import Flask, send_from_directory
+from flask_restful import Resource, Api
+from controller.wafer_finder import WaferFinder
 import os
-from models.wafermap import WaferMap
-import json
+
+app = Flask(__name__)
+api = Api(app)
 
 ROOT_DIR = os.getcwd()
-app = Flask(__name__,static_url_path='')
+APP_DIR = os.path.join(ROOT_DIR,'src/webapp')
 
 @app.route('/app/<path:path>')
-def send_js(path):
-    print(path)
-    return send_from_directory(os.path.join(ROOT_DIR,'src/webapp'), path)
+def serve_page(path):
+    print(APP_DIR)
+    return send_from_directory( APP_DIR, path)
 
-@app.route('/map/<int:wafer_id>')
-def getMap(wafer_id) :
-    waferFile = "wafer{0}".format(wafer_id)
-    # waferFilePath = os.path.join(ROOT_DIR,"data",waferFile)
-    waferFilePath = os.path.join("data",waferFile)
-    print(waferFilePath)
-    waferMap = WaferMap.load(waferFilePath)
-    print(waferMap.jsonData())
-    return json.dumps(waferMap.jsonData())
+api.add_resource(WaferFinder, '/map/<int:wafer_id>', endpoint='cv', resource_class_kwargs={ 'data_dir': 'data' })
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
+    # app.run(host='0.0.0.0' port=8080, debug=True)
