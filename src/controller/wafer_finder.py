@@ -14,5 +14,5 @@ class WaferFinder(Resource) :
         waferFilePath = os.path.join(self.data_dir,waferFile)
         print(waferFilePath)
         waferMap = WaferMap.load(waferFilePath)
-        print(waferMap.jsonData())
-        return json.dumps(waferMap.jsonData())
+        # jsonString = json.dumps(waferMap.jsonData())
+        return waferMap.jsonData()

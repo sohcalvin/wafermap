@@ -10,7 +10,9 @@ dataDir = "data/"
 def generateData() :
     # pattern1 = [[i,i] for i in (range(25,40))]
     pattern1 = [[i,i] for i in (range(25,35))]
+    pattern1.extend(pattern1)
     pattern2 = [[i,i] for i in (range(26,40))]
+    pattern2.extend(pattern2)
     for i in range(1,200):
         waferid = "wafer{0}".format(i)
         waferMap = WaferMap(waferid)
@@ -48,7 +50,7 @@ generateData()
 
 dataOneLinePerMap = loadData()
 tmp = [i[1] for i in dataOneLinePerMap]
-print(tmp)
+# print(tmp)
 X = pd.DataFrame(tmp)
 Y = np.array([i[0] for i in dataOneLinePerMap])
 
