@@ -4,6 +4,7 @@ import numpy as np
 from models.wafermap import WaferMap
 import os
 import json
+import pickle
 
 dataDir = "data/"
 
@@ -46,12 +47,14 @@ def buildNaiveBayesModel(X,Y) :
     classifier.fit(X,Y)
     return classifier
 
-generateData()
+# generateData()
 
 dataOneLinePerMap = loadData()
+print(dataOneLinePerMap[0]) # First row
+print(dataOneLinePerMap[1]) # Second row
+
 tmp = [i[1] for i in dataOneLinePerMap]
-# print(tmp)
-X = pd.DataFrame(tmp)
+X = pd.DataFrame(tmp) # Array of maplines
 Y = np.array([i[0] for i in dataOneLinePerMap])
 
 
@@ -69,8 +72,10 @@ print("Prediction score is " , model.score(X,Y))
 from sklearn import metrics
 print( "Train Accuracy :", metrics.accuracy_score(Y_train, train_pred))
 print( "Test Accuracy :", metrics.accuracy_score(Y_test, test_pred))
-# print(X)
-# print(Y)
+
+pickle.dump(model,open("model.p","wb"))
+
+
 
 
 
