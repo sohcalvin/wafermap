@@ -11,7 +11,7 @@ APP_DIR = os.path.join(ROOT_DIR,'src/webapp')
 
 @app.route('/app/<path:path>')
 def serve_page(path):
-    print(APP_DIR)
+    print(APP_DIR,"/" ,path)
     return send_from_directory( APP_DIR, path)
 
 api.add_resource(WaferFinder, '/map/<int:wafer_id>', endpoint='cv', resource_class_kwargs={ 'data_dir': 'data' })
