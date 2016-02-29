@@ -8,6 +8,8 @@ angular.module('wafermapApp')
                     $scope.mapData["wafer1"] = data.data;
             });
         };
+
+
         $scope.getMapData(1);
     }
 ]);
