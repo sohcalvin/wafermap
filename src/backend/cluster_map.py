@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-from common.data_utility import loadData
+from utility.data_utility import loadData
 
 dataOneLinePerMap = loadData()
 

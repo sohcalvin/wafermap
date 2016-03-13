@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
-from common.data_utility import generateData
-from common.data_utility import loadData
+from utility.data_utility import generateData
+from utility.data_utility import loadData
 
 from models.wafermap import WaferMap
 import os
@@ -15,9 +15,13 @@ def buildNaiveBayesModel(X,Y) :
     classifier.fit(X,Y)
     return classifier
 
-# generateData()
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(SCRIPT_DIR, "../../data")
 
-dataOneLinePerMap = loadData()
+generateData(DATA_DIR)
+# exit()
+
+dataOneLinePerMap = loadData(DATA_DIR)
 print(dataOneLinePerMap[0]) # First row
 print(dataOneLinePerMap[1]) # Second row
 

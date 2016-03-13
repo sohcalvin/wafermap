@@ -7,8 +7,8 @@ app = Flask(__name__)
 api = Api(app)
 
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
-APP_DIR = ROOT_DIR
-DATA_DIR = os.path.join(APP_DIR,"../../data")
+APP_DIR = os.path.join(ROOT_DIR,"frontend")
+DATA_DIR = os.path.join(ROOT_DIR,"../../data")
 
 
 @app.route('/app/<path:path>')
