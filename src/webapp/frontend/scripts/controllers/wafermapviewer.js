@@ -7,13 +7,20 @@ angular.module('wafermapApp')
 
         $scope.getMapList = function(max){
             $http.get("../map").then(function(response){
-                    $scope.mapList = response.data
+                    $scope.mapList = response.data;
+                    $scope.getMapDataFromMapList();
                 }
             );
         }
-        $scope.getMapData = function(map){
-                    var mapName = map.name;
-                    var mapUrl = map.url;
+        $scope.getMapDataFromMapList = function(){
+            for(var i in $scope.mapList){
+                $scope.getMapData($scope.mapList[i]);
+                if(i >16) break;
+            }
+        }
+        $scope.getMapData = function(mapListItem){
+                    var mapName = mapListItem.name;
+                    var mapUrl = mapListItem.url;
                     $http.get(".." + mapUrl).then(function(response) {
                        $scope.mapData[mapName] = response.data;
                        var patternName = $scope.mapData[mapName].title;
@@ -34,6 +41,7 @@ angular.module('wafermapApp')
 
 
         $scope.getMapList(5);
+
 
     }
 ]);

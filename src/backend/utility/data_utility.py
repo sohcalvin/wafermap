@@ -16,10 +16,11 @@ def generateData(data_dir) :
 
     pattern1 = []
     for i in (range(25,65)):
+        offset =4
         if(i < 45) :
-            pattern1.append([i+5,i])
+            pattern1.append([i+offset,i])
         else :
-            pattern1.append([i-5,i])
+            pattern1.append([i-offset,i])
     pattern1.extend(pattern1)
     # pattern1 = [[val+i*2,val] for i,val in enumerate(range(25,35), 1)]
 
