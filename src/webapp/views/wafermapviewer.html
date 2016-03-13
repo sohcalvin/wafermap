@@ -1,13 +1,24 @@
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-2">
+                 <div ng-repeat="m in mapList">
+                        <a href="" ng-click='getMapData(m)' >{{m.name}}</a>
+                </div>
+            </div>
+            <div class="col-sm-5">
+                <div id="mapgrid1"></div>
+            </div>
+            <div class="col-sm-5">
+                <div id="mapgrid2"></div>
+            </div>
+        </div>
+    </div>
 
 
-<div class="row">
-    <wafermap map-data="mapData.wafer1"></wafermap>
-</div>
-<div drawer>
-    <h1>asdfsadf</h1>
 
 
-</div>
+<!--<div drawer>-->
+<!--</div>-->
 
 <!--<div>-->
     <!--<div class="drawer" ng-class="{'close':isClose, 'open':!isClose}" >-->

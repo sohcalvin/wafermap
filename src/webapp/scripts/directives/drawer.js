@@ -7,10 +7,8 @@ svgApp.directive("drawer", function($parse,$window) {
     transclude: true,
     template:
     `
-
-
-        <div  class="drawer" ng-class="{'close':isClose, 'open':!isClose}" >
-            <div  ng-click="isClose = !isClose" style="height:100%;width:20px;background-color:lightgreen;float:left"></div>
+       <div  class="drawer" ng-class="{'close':isClose, 'open':!isClose}" >
+            <div  ng-click="isClose = !isClose" style="height:100%;width:20px;background-color:orange;float:left"></div>
             <div ng-transclude style="display:{{(isClose)? 'none':'inline';}}"/>
         </div>
 
@@ -23,7 +21,7 @@ svgApp.directive("drawer", function($parse,$window) {
                 transition: width 0.5S linear,opacity 0.5S linear;
 
                 background-color: gray;
-                opacity : 0.95;
+                opacity : 0.99;
                 position:absolute;
                 height: 250px;
                 width : 100%;
@@ -34,7 +32,7 @@ svgApp.directive("drawer", function($parse,$window) {
             }
             .close {
                 width:20px;
-                opacity:1;
+                opacity:0.3;
                 border:none;
             }
             .open {

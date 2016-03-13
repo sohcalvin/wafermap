@@ -4,7 +4,7 @@ var svgApp = angular.module('wafermapApp');
 svgApp.directive("wafermap", function($parse,$window) {
   return{
     restrict: "EA",
-    template: "<svg width='250' height='250' style='outline: solid #64B5F6' ></svg>",
+    template: "<svg width='150' height='150' style='outline: solid #64B5F6' ></svg>",
     link: function(scope, elem, attrs){
             var d3 = $window.d3;
             var rawSvg=elem.find('svg');
@@ -25,7 +25,7 @@ svgApp.directive("wafermap", function($parse,$window) {
                 }
                 var bins = wafermap_data.bindata;
                 positions = bins["1"];
-                var canvasSizeX = 250;
+                var canvasSizeX = 150;
                 var canvasSizeY = canvasSizeX;
                 var waferSizeX = wafermap_data.xDim;
                 var waferSizeY = wafermap_data.yDim;

@@ -6,15 +6,19 @@ import os
 app = Flask(__name__)
 api = Api(app)
 
-ROOT_DIR = os.getcwd()
-APP_DIR = os.path.join(ROOT_DIR,'src/webapp')
+ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
+APP_DIR = ROOT_DIR
+DATA_DIR = os.path.join(APP_DIR,"../../data")
+
 
 @app.route('/app/<path:path>')
 def serve_page(path):
-    print(APP_DIR,"/" ,path)
+    # print("Serving file : ",APP_DIR,"/" ,path)
     return send_from_directory( APP_DIR, path)
 
-api.add_resource(WaferFinder, '/map/<int:wafer_id>', endpoint='cv', resource_class_kwargs={ 'data_dir': 'data' })
+api.add_resource(WaferFinder, '/map/<int:wafer_id>', endpoint='map', resource_class_kwargs={ 'data_dir': DATA_DIR })
+api.add_resource(WaferFinder, '/map', endpoint='maplist', resource_class_kwargs={ 'data_dir': DATA_DIR })
+
 
 if __name__ == '__main__':
     app.run(debug=True)
