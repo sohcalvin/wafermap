@@ -49,7 +49,7 @@ svgApp.directive("wafermapEditor", function($parse,$window) {
                             .attr("fill","lightblue");
 
               canvas
-              .selectAll("line").data([5,10,15]).enter()
+              .selectAll("line").data([20,21,22,23,24,25,26,27,28,29]).enter()
                  .append("line")
                  .attr("x1", 0)
                  .attr("y1", function(d){ return d;})
@@ -58,7 +58,7 @@ svgApp.directive("wafermapEditor", function($parse,$window) {
                  .attr("stroke-width", 1)
                  .attr("stroke", "black");
               canvas
-              .selectAll("line").data([65,20,55,88]).enter()
+              .selectAll("line").data([5], function(d){  return d;}).enter()
                  .append("line")
                  .attr("x1", 0)
                  .attr("y1", function(d){ return d;})
