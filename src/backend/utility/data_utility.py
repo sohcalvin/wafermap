@@ -22,17 +22,24 @@ def generateData(data_dir) :
         else :
             pattern1.append([i-offset,i])
     pattern1.extend(pattern1)
-    # pattern1 = [[val+i*2,val] for i,val in enumerate(range(25,35), 1)]
+
+    pattern3 = [[i,i] for i in (range(65, 85))]
+    pattern3.extend(pattern3)
+
 
     for i in range(1,200):
         waferid = "wafer{0}".format(i)
         waferMap = WaferMap(waferid)
-        if(np.random.rand() > 0.5) :
+        rand = np.random.rand()
+        if(rand > 0.677) :
             waferMap.initMap(100,100,pattern1)
             waferMap.setTitle("Pattern1")
-        else :
+        elif (rand > 0.333) :
             waferMap.initMap(100,100,pattern2)
             waferMap.setTitle("Pattern2")
+        else :
+            waferMap.initMap(100,100,pattern3)
+            waferMap.setTitle("Pattern3")
         waferMap.save(data_dir + "/{0}".format(waferid))
 
 

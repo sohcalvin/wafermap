@@ -1,26 +1,74 @@
 var svgApp = angular.module('wafermapApp');
 
 
-svgApp.directive("wafermap", function($parse,$window) {
+svgApp.directive("wafermapEditor", function($parse,$window) {
   return{
     restrict: "EA",
     template: function(elem, attr) {
-            var width = attr.width || 150;
-            var height = attr.height || 150;
+            var width = attr.width || 250;
+            var height = attr.height || 250;
             return "<svg width="+width+" height="+height+" style='outline: solid #64B5F6' ></svg>";
     },
     link: function(scope, elem, attrs){
+          function getSvg(){
             var d3 = $window.d3;
             var rawSvg=elem.find('svg');
-            var canvas = d3.select(rawSvg[0]);
+            var svg = d3.select(rawSvg[0]);
+            return svg;
+          }
 
-            var f = $parse(attrs.mapData)
+          var canvas = getSvg();
+          drawGrid(canvas,100,100);
+
+
+
+          var f = $parse(attrs.mapData)
             var wafermap_data = f(scope);
 
             scope.$watchCollection(f, function(newVal, oldVal){
                wafermap_data=newVal;
                drawWaferMap();
            });
+
+
+
+          function drawGrid(canvas, rows, columns){
+              console.log("Drawing grid of " + rows + " rows by " + columns + " columns");
+              var canvasSizeX = canvas.attr("width");
+              var canvasSizeY = canvas.attr("height");
+              var centerX = canvasSizeX /2;
+              var centerY = canvasSizeY /2;
+              var radius = canvasSizeX/2;
+              var chipSizeX = canvasSizeX / columns;
+              var chipSizeY = canvasSizeY / rows;
+              var circle = canvas.append("circle")
+                            .attr("cx",centerX)
+                            .attr("cy",centerY)
+                            .attr("r",radius)
+                            //.attr("fill","white");
+                            .attr("fill","lightblue");
+
+              canvas
+              .selectAll("line").data([5,10,15]).enter()
+                 .append("line")
+                 .attr("x1", 0)
+                 .attr("y1", function(d){ return d;})
+                 .attr("x2", canvasSizeX)
+                 .attr("y2", function(d){ return d;})
+                 .attr("stroke-width", 1)
+                 .attr("stroke", "black");
+              canvas
+              .selectAll("line").data([65,20,55,88]).enter()
+                 .append("line")
+                 .attr("x1", 0)
+                 .attr("y1", function(d){ return d;})
+                 .attr("x2", canvasSizeX)
+                 .attr("y2", function(d){ return d;})
+                 .attr("stroke-width", 1)
+                 .attr("stroke", "black");
+
+
+          }
 
             function drawWaferMap(){
                 if(!wafermap_data){

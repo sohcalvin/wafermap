@@ -2,23 +2,15 @@ import pandas as pd
 import numpy as np
 from utility.data_utility import generateData
 from utility.data_utility import loadData
+from utility.model_utility import buildNaiveBayesModel
 
-from models.wafermap import WaferMap
 import os
-import json
 import pickle
-
-def buildNaiveBayesModel(X,Y) :
-    #Naive Bayes Classifier
-    from sklearn.naive_bayes import MultinomialNB
-    classifier = MultinomialNB()
-    classifier.fit(X,Y)
-    return classifier
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(SCRIPT_DIR, "../../data")
 
-generateData(DATA_DIR)
+# generateData(DATA_DIR)
 # exit()
 
 dataOneLinePerMap = loadData(DATA_DIR)

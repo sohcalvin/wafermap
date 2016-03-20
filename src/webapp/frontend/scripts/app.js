@@ -20,6 +20,11 @@
             templateUrl: 'views/wafermapviewer.html',
             controller: 'WafermapController'
         })
+        .state('wafermapeditor', {
+            url: '/wafermapeditor',
+            templateUrl: 'views/wafermapeditor.html',
+            controller: 'WafermapEditorController'
+        })
         ;
 
         $urlRouterProvider.otherwise("/");

@@ -36,6 +36,9 @@ angular.module('wafermapApp')
             if(patternName == "Pattern2"){
                 mapgrid = $("#mapgrid2");
             }
+            if(patternName == "Pattern3"){
+                mapgrid = $("#mapgrid3");
+            }
             mapgrid.append($compile("<wafermap map-data='mapData."+mapName+"'></wafermap>")($scope));
         };
 
