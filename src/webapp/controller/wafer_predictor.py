@@ -13,11 +13,21 @@ class WaferPredictor(Resource) :
 
     def post(self):
         json_data = request.get_json(force=True)
-        coord = [k for k in json_data["mapData"].keys()]
-        self.coordToMap(coord)
+        coord = [k.split(",") for k in json_data["mapData"].keys()]
+        mapLine = self.coordToMap(coord)
+        print(mapLine)
         return 'Todo', 200
 
 
     def coordToMap(self, arrayOfCoord):
-        
-        pass
+        print(arrayOfCoord)
+        rows = 100;
+        cols = 100;
+        map = [0] * (rows * cols)
+        for xy in arrayOfCoord :
+            x = int(xy[0])
+            y = int(xy[1])
+            # print(x, ",", y)
+            idx = (y * cols) + x
+            map[idx] = 1
+        return map
