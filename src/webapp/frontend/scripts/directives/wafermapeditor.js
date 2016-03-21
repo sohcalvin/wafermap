@@ -4,6 +4,9 @@ var svgApp = angular.module('wafermapApp');
 svgApp.directive("wafermapEditor", function($parse,$window) {
   return{
     restrict: "EA",
+    scope : {
+        mapData : "="
+    },
     template: function(elem, attr) {
             var width = attr.width || 250;
             var height = attr.height || 250;
@@ -16,19 +19,19 @@ svgApp.directive("wafermapEditor", function($parse,$window) {
             var svg = d3.select(rawSvg[0]);
             return svg;
           }
-
+          if(!scope.mapData){ scope.mapData={} ;}
           var canvas = getSvg();
           drawGrid(canvas,100,100);
 
 
 
-          var f = $parse(attrs.mapData)
-            var wafermap_data = f(scope);
-
-            scope.$watchCollection(f, function(newVal, oldVal){
-               wafermap_data=newVal;
-               drawWaferMap();
-           });
+//          var f = $parse(attrs.mapData)
+//            var wafermap_data = f(scope);
+//
+//            scope.$watchCollection(f, function(newVal, oldVal){
+//               wafermap_data=newVal;
+//               drawWaferMap();
+//           });
 
 
 
@@ -72,15 +75,26 @@ svgApp.directive("wafermapEditor", function($parse,$window) {
 
                 var drag = d3.behavior.drag();
                 canvas.call(drag);
-                drag.on("drag", mousemove);
-    //             canvas.on("mousemove", mousemove);
-                function mousemove(d, i) {
+                drag.on("drag", markCell);
+                canvas.on("click", markCell);
+                function markCell(d, i) {
                         posXY = d3.mouse(this);
                         cellXY = positionToCell(posXY[0],posXY[1]);
-                        console.log(cellXY);
-
+                        if(!scope.mapData[cellXY]){
+                            fillCell(cellXY);
+                        }
+                        scope.mapData[cellXY] = 1;
                 }
-
+                function fillCell(cellXY){
+                    var posX = cellXY[0] * chipSizeX;
+                    var posY = cellXY[1] * chipSizeY;
+                    canvas.append("rect")
+                            .attr("x",posX)
+                            .attr("y",posY)
+                            .attr("width", chipSizeX)
+                            .attr("height", chipSizeY)
+                            .attr("fill","black");
+                }
                 function positionToCell(xPos, yPos){
                     var cellXY = [];
                     cellXY[0] = Math.floor(xPos / chipSizeX);
@@ -88,47 +102,48 @@ svgApp.directive("wafermapEditor", function($parse,$window) {
                     return cellXY;
                 }
             }
-            function drawWaferMap(){
-                if(!wafermap_data){
-                    console.log("Mapdata at " + attrs.mapData + "  not ready");
-                    return;
-                }
-                var bins = wafermap_data.bindata;
-                positions = bins["1"];
-                var canvasSizeX = 150;
-                var canvasSizeY = canvasSizeX;
-                var waferSizeX = wafermap_data.xDim;
-                var waferSizeY = wafermap_data.yDim;
-                var centerX = canvasSizeX /2;
-                var centerY = canvasSizeY /2;
-                var radius = canvasSizeX/2;
-                var chipSizeX = canvasSizeX / waferSizeX;
-                var chipSizeY = canvasSizeY / waferSizeY;
-                var title = wafermap_data.title;
-
-                 var circle = canvas.append("circle")
-                            .attr("cx",centerX)
-                            .attr("cy",centerY)
-                            .attr("r",radius)
-                            //.attr("fill","white");
-                            .attr("fill","lightblue");
-
-
-                positions.forEach(function(i){
-                    var posX = i.x * chipSizeX;
-                    var posY = i.y * chipSizeY;
-                    canvas.append("rect")
-                            .attr("x",posX)
-                            .attr("y",posY)
-                            .attr("width", chipSizeX)
-                            .attr("height", chipSizeY);
-                });
-
-                canvas.append("text")
-                    .attr("x",5)
-                    .attr("y",25)
-                    .text(title);
-            }
+//            function drawWaferMap(){
+//                if(!wafermap_data){
+//                    console.log("Mapdata at " + attrs.mapData + "  not ready");
+//                    return;
+//                }
+//                var bins = wafermap_data.bindata;
+//                positions = bins["1"];
+//                var canvasSizeX = 150;
+//                var canvasSizeY = canvasSizeX;
+//                var waferSizeX = wafermap_data.xDim;
+//                var waferSizeY = wafermap_data.yDim;
+//                var centerX = canvasSizeX /2;
+//                var centerY = canvasSizeY /2;
+//                var radius = canvasSizeX/2;
+//                var chipSizeX = canvasSizeX / waferSizeX;
+//                var chipSizeY = canvasSizeY / waferSizeY;
+//                var title = wafermap_data.title;
+//
+//                 var circle = canvas.append("circle")
+//                            .attr("cx",centerX)
+//                            .attr("cy",centerY)
+//                            .attr("r",radius)
+//                            //.attr("fill","white");
+//                            .attr("fill","lightblue");
+//
+//
+//                positions.forEach(function(i){
+//                    var posX = i.x * chipSizeX;
+//                    var posY = i.y * chipSizeY;
+//                    canvas.append("rect")
+//                            .attr("x",posX)
+//                            .attr("y",posY)
+//                            .attr("width", chipSizeX)
+//                            .attr("height", chipSizeY);
+//                });
+//
+//                canvas.append("text")
+//                    .attr("x",5)
+//                    .attr("y",25)
+//                    .text(title);
+//            }
+//
     }
   };
 });
