@@ -10,7 +10,7 @@ import pickle
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(SCRIPT_DIR, "../../data")
 
-# generateData(DATA_DIR)
+generateData(DATA_DIR)
 # exit()
 
 dataOneLinePerMap = loadData(DATA_DIR)

@@ -10,30 +10,28 @@ svgApp.directive("wafermapEditor", function($parse,$window) {
     template: function(elem, attr) {
             var width = attr.width || 250;
             var height = attr.height || 250;
-            return "<svg width="+width+" height="+height+" style='outline: solid #64B5F6' ></svg>";
+            return "<div><button ng-click='clear()' class='btn btn-default navbar-btn pull-right'>Clear</button></div><svg width="+width+" height="+height+" style='outline: solid #64B5F6' ></svg>";
     },
     link: function(scope, elem, attrs){
+
+          scope.clear = function(){
+            console.log("Clearing");
+            init();
+          };
+
+          init();
+          function init(){
+              scope.mapData={} ;
+              var canvas = getSvg();
+              canvas.selectAll("*").remove();
+              drawGrid(canvas,100,100);
+          }
           function getSvg(){
             var d3 = $window.d3;
             var rawSvg=elem.find('svg');
             var svg = d3.select(rawSvg[0]);
             return svg;
           }
-          if(!scope.mapData){ scope.mapData={} ;}
-          var canvas = getSvg();
-          drawGrid(canvas,100,100);
-
-
-
-//          var f = $parse(attrs.mapData)
-//            var wafermap_data = f(scope);
-//
-//            scope.$watchCollection(f, function(newVal, oldVal){
-//               wafermap_data=newVal;
-//               drawWaferMap();
-//           });
-
-
 
           function drawGrid(canvas, rows, columns){
               console.log("Drawing grid of " + rows + " rows by " + columns + " columns");

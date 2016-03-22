@@ -1,8 +1,11 @@
-    <button type="button" class="btn btn-default navbar-btn" ng-click="classify()">Classify</button>
 
-    <div class="container">
+    <div class="row">
+        <button type="button" class="btn btn-default navbar-btn" ng-click="classify()">Classify</button>
+         {{result}}</div>
+
+    <div class="row container">
         <div class="row">
-           <wafermap-editor width='500' height='500' map-data="mapData"></wafermap-editor>
+           <wafermap-editor width='500' height='500' map-data="mapData" ></wafermap-editor>
         </div>
     </div>
 
