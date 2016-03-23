@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 from utility.data_utility import generateData
 from utility.data_utility import loadData
-from utility.model_utility import buildNaiveBayesModel
+from utility.model_utility import buildNaiveBayesModel, buildSVCModel, buildLogRegressionModel
 
 import os
 import pickle
@@ -10,7 +10,7 @@ import pickle
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(SCRIPT_DIR, "../../data")
 
-generateData(DATA_DIR)
+# generateData(DATA_DIR)
 # exit()
 
 dataOneLinePerMap = loadData(DATA_DIR)
@@ -21,7 +21,10 @@ tmp = [i[1] for i in dataOneLinePerMap]
 
 X = pd.DataFrame(tmp) # Array of maplines
 Y = np.array([i[0] for i in dataOneLinePerMap])
-model = buildNaiveBayesModel(X, Y)
+# model = buildNaiveBayesModel(X, Y)
+# model = buildSVCModel(X, Y)
+model = buildLogRegressionModel(X, Y)
+
 pickle.dump(model,open("model.p","wb"))
 def do_train_split():
     from sklearn.cross_validation import train_test_split
