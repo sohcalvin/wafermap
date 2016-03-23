@@ -18,8 +18,15 @@ angular.module('wafermapApp')
             };
             $http(req).then(
                 function(response){
-                    console.log(response.data);
-                    $scope.result = response.data;
+                    var classifiedPattern = response.data.pattern;
+                    var proba = response.data.class_to_proba;
+                    $scope.result = classifiedPattern + " - Prob("+proba[classifiedPattern] +")";
+                    $scope.result_detail = "";
+                    for(var i in proba){
+                        $scope.result_detail += i + " : " + proba[i] + "\n";
+                    }
+                    console.log($scope.result_detail);
+
 
                 },
                 function(response){

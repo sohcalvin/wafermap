@@ -20,7 +20,18 @@ class WaferPredictor(Resource) :
         print(coord)
         print(result)
 
-        return result[0], 200
+        proba = self.model.predict_proba(X)
+        class_to_proba= {}
+        for i,c in enumerate(self.model.classes_) :
+            class_to_proba[c] = proba[0][i]
+        print(class_to_proba)
+        print(proba)
+        resp = {
+            "pattern" : result[0],
+            "class_to_proba" : class_to_proba
+        }
+
+        return resp, 200
 
 
     def coordToMap(self, arrayOfCoord):

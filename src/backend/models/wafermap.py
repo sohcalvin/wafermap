@@ -36,8 +36,8 @@ class WaferMap(object) :
     def _radomisedMarkPattern(self,pattern) :
         for i in pattern :
             col, row = i
-            offsetRow = np.random.randint(-2,2,1)
-            offsetCol = np.random.randint(-2,2,1)
+            offsetRow = np.random.randint(-3,3,1)
+            offsetCol = np.random.randint(-3,3,1)
             row += offsetRow
             col += offsetCol
             self.body[row, col] = 1
