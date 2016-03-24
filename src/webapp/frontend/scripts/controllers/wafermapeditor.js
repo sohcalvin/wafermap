@@ -8,6 +8,7 @@ angular.module('wafermapApp')
         $scope.classify = function(){
             console.log($scope.mapData);
             $scope.result = "..."
+            $scope.result_detail =[]
             var req = {
                 method: 'POST',
                 url: 'http://localhost:5000/wafer_predictor',
@@ -21,11 +22,13 @@ angular.module('wafermapApp')
                     var classifiedPattern = response.data.pattern;
                     var proba = response.data.class_to_proba;
                     $scope.result = classifiedPattern + " - Prob("+proba[classifiedPattern] +")";
-                    $scope.result_detail = "";
+
+                    var arrOfObj = new Array();
                     for(var i in proba){
-                        $scope.result_detail += i + " : " + proba[i] + "\n";
+                        arrOfObj.push({"pattern" : i, "proba" : proba[i]})
                     }
-                    console.log($scope.result_detail);
+                    arrOfObj.sort(function(a,b){return b.proba - a.proba;})
+                    $scope.result_detail = arrOfObj;
 
 
                 },

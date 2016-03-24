@@ -19,7 +19,7 @@ def buildSVCModel(X, Y) :
 
 def buildLogRegressionModel(X, Y) :
     from sklearn.linear_model import LogisticRegression
-    clf = LogisticRegression(C=1e5)
+    clf = LogisticRegression(C=1e5,multi_class='multinomial', solver='lbfgs')
     clf.fit(X, Y)
     return clf
 # >>> print(clf.predict([[-0.8, -1]]))

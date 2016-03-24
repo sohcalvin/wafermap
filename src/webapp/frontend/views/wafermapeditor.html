@@ -1,56 +1,23 @@
-
-    <div class="row">
-        <button type="button" class="btn btn-default navbar-btn" ng-click="classify()">Classify</button>
-         {{result}}</div>
-
-    <div class="row container">
-        <div class="row">
-           <wafermap-editor width='500' height='500' map-data="mapData" ></wafermap-editor>
+<div class="container-fluid row">
+    <div class="col-sm-6">
+        <div class="row container">
+            <div class="row">
+                <wafermap-editor width='500' height='500' map-data="mapData"></wafermap-editor>
+            </div>
         </div>
     </div>
-
-
-
-
-<!--<div drawer>-->
-<!--</div>-->
-
-<!--<div>-->
-    <!--<div class="drawer" ng-class="{'close':isClose, 'open':!isClose}" >-->
-        <!--<div  ng-click="isClose = !isClose" style="height:100%;width:20px;background-color:lightgreen"></div>-->
-    <!--</div>-->
-<!--</div>-->
-
-<!--<style>-->
-    <!--.drawer {-->
-        <!-- -webkit-transition: height 100ms linear;-->
-        <!-- -moz-transition: height 100ms linear;-->
-        <!-- -o-transition: height 100ms linear;-->
-        <!-- -ms-transition: height 100ms linear;-->
-        <!--transition: width 0.5S linear,opacity 0.5S linear;-->
-
-        <!--background-color: gray;-->
-        <!--opacity : 0.95;-->
-        <!--position:absolute;-->
-        <!--height: 250px;-->
-        <!--width : 100%;-->
-        <!--left:0px;-->
-        <!--top : 50px;-->
-        <!--border : solid 1px black-->
-    <!--}-->
-    <!--.close {-->
-        <!--width:20px;-->
-        <!--opacity:1;-->
-        <!--border:none;-->
-    <!--}-->
-    <!--.open {-->
-        <!--width:100%;-->
-    <!--}-->
-
-
-<!--</style>-->
-
-
-
-
+    <div class="col-sm-6">
+        <div class="row">
+            <div class="pull-left">
+                <button type="button" class="btn btn-default navbar-btn" ng-click="classify()">Classify</button>
+                <table class="table table-hover">
+                    <tr ng-repeat="i in result_detail">
+                        <td>{{i.pattern}}</td>
+                        <td>{{i.proba}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 
