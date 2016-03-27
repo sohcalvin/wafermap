@@ -1,12 +1,12 @@
 <div class="container-fluid row">
-    <div class="col-sm-6">
+    <div class="col-sm-8">
         <div class="row container">
             <div class="row">
                 <wafermap-editor width='500' height='500' map-data="mapData"></wafermap-editor>
             </div>
         </div>
     </div>
-    <div class="col-sm-6">
+    <div class="col-sm-4">
         <div class="row">
             <div class="pull-left">
                 <button type="button" class="btn btn-default navbar-btn" ng-click="classify()">Classify</button>
@@ -17,6 +17,16 @@
                     </tr>
                 </table>
             </div>
+        </div>
+        <div class="row">
+            <form role="form">
+                <div class="form-group">
+                    <label for="pattern_name">Pattern name :</label>
+                    <input type="text" class="form-control" id="pattern_name" ng-model="patternName">
+                </div>
+                <button type="button" class="btn btn-default navbar-btn" ng-click="savePattern()">Save Pattern for model
+
+            </form>
         </div>
     </div>
 </div>

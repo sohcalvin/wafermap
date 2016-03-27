@@ -1,9 +1,23 @@
 
 import numpy as np
+import scipy
 
 from models.wafermap import WaferMap
 import os
 
+def PoissonPP( rt, Dx, Dy=None ):
+    '''
+    Determines the number of events `N` for a rectangular region,
+    given the rate `rt` and the dimensions, `Dx`, `Dy`.
+    Returns a <2xN> NumPy array.
+    '''
+    if Dy == None:
+        Dy = Dx
+    N = scipy.stats.poisson( rt*Dx*Dy ).rvs()
+    x = scipy.stats.uniform.rvs(0,Dx,((N,1)))
+    y = scipy.stats.uniform.rvs(0,Dy,((N,1)))
+    P = np.hstack((x,y))
+    return P
 
 
 

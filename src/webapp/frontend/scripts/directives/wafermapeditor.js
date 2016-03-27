@@ -10,7 +10,8 @@ svgApp.directive("wafermapEditor", function($parse,$window) {
     template: function(elem, attr) {
             var width = attr.width || 250;
             var height = attr.height || 250;
-            return "<div><button ng-click='clear()' class='btn btn-default navbar-btn pull-right'>Clear</button></div><svg width="+width+" height="+height+" style='outline: solid #64B5F6' ></svg>";
+            return "<div><button ng-click='clear()' class='btn btn-default navbar-btn'>Clear</button></div>"
+                    +"<svg width="+width+" height="+height+" style='outline: solid #64B5F6' ></svg>";
     },
     link: function(scope, elem, attrs){
 
