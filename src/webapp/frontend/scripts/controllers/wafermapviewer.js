@@ -25,8 +25,6 @@ angular.module('wafermapApp')
                        $scope.mapData[mapName] = response.data;
                        var patternName = $scope.mapData[mapName].title;
                        $scope.addWaferMap(mapName, patternName);
-
-
             });
         };
 

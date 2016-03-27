@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-from utility.data_utility import generateData
+from utility.data_utility import generateData,readSeedPattern
 from utility.data_utility import loadData
 from utility.model_utility import buildNaiveBayesModel, buildSVCModel, buildLogRegressionModel
 
@@ -9,11 +9,15 @@ import pickle
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(SCRIPT_DIR, "../../data")
+TRAINING_MAP_DIR = os.path.join(DATA_DIR,"training_maps")
+PATTERN_DIR = os.path.join(DATA_DIR,"patterns")
 
-# generateData(DATA_DIR)
+seed_pattern_dict = readSeedPattern(PATTERN_DIR)
+generateData(TRAINING_MAP_DIR, seed_pattern_dict,number_per_pattern=200)
 # exit()
 
-dataOneLinePerMap = loadData(DATA_DIR)
+
+dataOneLinePerMap = loadData(TRAINING_MAP_DIR)
 print(dataOneLinePerMap[0]) # First row
 print(dataOneLinePerMap[1]) # Second row
 

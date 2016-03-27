@@ -3,3 +3,4 @@
 src/webapp/frontend/bower_components/
 data/
 .gitignore
+.idea/vcs.xml

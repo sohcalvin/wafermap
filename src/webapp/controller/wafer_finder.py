@@ -15,12 +15,14 @@ class WaferFinder(Resource) :
         if(wafer_id is None) :
             return self.getWaferList()
 
-        waferFile = "wafer{0}".format(wafer_id)
+        # waferFile = "wafer{0}".format(wafer_id)
+        waferFile = wafer_id
         waferFilePath = os.path.join(self.data_dir,waferFile)
         waferMap = WaferMap.load(waferFilePath)
         return waferMap.jsonData()
 
     def getWaferList(self):
-        waferFiles = os.listdir(self.data_dir)
-        waferFiles.sort(key=lambda s : int(s[5:]))
-        return [ {"name" : w, "url" : url_for("map", wafer_id= int(w[5:]))} for w in waferFiles]
+        waferFiles = [ f for f in os.listdir(self.data_dir) if(os.path.isfile(os.path.join(self.data_dir, f))) ]
+        waferFiles.sort(key=lambda s : int(s.split('_')[-1])) # numeric sort by the waferid extension
+        return [ {"name" : w, "url" : url_for("map", wafer_id = w)} for w in waferFiles]
+        # return [ {"name" : w, "url" : url_for("map", wafer_id= int(w[5:]))} for w in waferFiles]

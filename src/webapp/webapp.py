@@ -12,6 +12,7 @@ api = Api(app)
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 APP_DIR = os.path.join(ROOT_DIR,"frontend")
 DATA_DIR = os.path.join(ROOT_DIR,"../../data")
+TRAINING_DATA_DIR = os.path.join(DATA_DIR,"training_maps")
 BACKEND_DIR = os.path.join(ROOT_DIR, "../backend")
 model_pickle_file = os.path.join(BACKEND_DIR,"model.p")
 model = pickle.load(open(model_pickle_file,"rb"))
@@ -23,8 +24,8 @@ def serve_page(path):
     return send_from_directory( APP_DIR, path)
 
 
-api.add_resource(WaferFinder, '/map/<int:wafer_id>', endpoint='map', resource_class_kwargs={ 'data_dir': DATA_DIR })
-api.add_resource(WaferFinder, '/map', endpoint='maplist', resource_class_kwargs={ 'data_dir': DATA_DIR })
+api.add_resource(WaferFinder, '/map/<string:wafer_id>', endpoint='map', resource_class_kwargs={ 'data_dir': TRAINING_DATA_DIR })
+api.add_resource(WaferFinder, '/map', endpoint='maplist', resource_class_kwargs={ 'data_dir': TRAINING_DATA_DIR })
 api.add_resource(WaferPredictor, '/wafer_predictor', endpoint='wafer_predictor', resource_class_kwargs={ 'model': model })
 api.add_resource(WaferPatternManager, '/wafer_pattern_manager', endpoint='wafer_pattern_generator', resource_class_kwargs={ 'data_dir': DATA_DIR })
 
