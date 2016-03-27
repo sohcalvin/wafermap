@@ -30,6 +30,19 @@ angular.module('wafermapApp')
 
         $scope.addWaferMap = function(mapName, patternName){
             console.log("Adding " + mapName + " for " + patternName );
+            var mapgridId = "#" + patternName;
+            var mapgrid = $(mapgridId);
+            if(!mapgrid.length){
+                var mapgridContainer = $("#mapgrid-container");
+                mapgridContainer.append(
+                    $compile("<div class='row' id='"+patternName+"'></div>")($scope)
+                );
+                mapgrid = $(mapgridId);
+            }
+            mapgrid.append($compile("<wafermap map-data='mapData."+mapName+"'></wafermap>")($scope));
+        };
+        $scope.addWaferMap_ = function(mapName, patternName){
+            console.log("Adding " + mapName + " for " + patternName );
             var mapgrid = $("#mapgrid1");
             if(patternName == "Pattern2"){
                 mapgrid = $("#mapgrid2");
@@ -39,6 +52,7 @@ angular.module('wafermapApp')
             }
             mapgrid.append($compile("<wafermap map-data='mapData."+mapName+"'></wafermap>")($scope));
         };
+
 
 
         $scope.getMapList(5);

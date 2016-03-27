@@ -1,6 +1,6 @@
+.idea/vcs.xml
 .idea/*
 *__pycache__*
 src/webapp/frontend/bower_components/
 data/
 .gitignore
-.idea/vcs.xml
